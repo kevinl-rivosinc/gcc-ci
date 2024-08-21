@@ -23,5 +23,5 @@ jobs:
           touch test.log
           echo "This is a test gist" >> test.log
           python3 -m pip install pygithub requests pyopenssl --upgrade
-          python3 ./scripts/create_gist.py --token ${{ secrets.GIST_TOKEN }} --input test.log --output url.log
+          python3 ./scripts/create_gist.py --token ${{ secrets.GIST_TOKEN }} --input test.log --output url.log --title "hi gcc 0293c c.log"
           cat url.log

@@ -20,6 +20,12 @@ def parse_arguments():
         help="Path to the outputfile that would contain the created gist url",
     )
     parser.add_argument(
+        "--title",
+        required=False,
+        type=str,
+        help="File name to be displayed in the uploaded gist",
+    )
+    parser.add_argument(
         "--token",
         required=True,
         type=str,
@@ -28,7 +34,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def create_gist(input_file: str, token: str) -> str:
+def create_gist(input_file: str, token: str, title: str | None) -> str:
     """
     Creates a private GitHub Gist from the contents of the specified input file.
     The URL of the created Gist is returned.
@@ -49,11 +55,11 @@ def create_gist(input_file: str, token: str) -> str:
         raise RuntimeError(f"Input file {input_file} doesn't exist")
 
     input_contents = input_path.read_text(encoding="utf-8")
-
+    input_file_title = title.replace(" ", "_") if title else input_file
     github = Github(token)
     auth_user = github.get_user()
     gist = auth_user.create_gist(
-        public=False, files={"test_gist_name.log": InputFileContent(content=input_contents)}
+        public=False, files={input_file_title: InputFileContent(content=input_contents)}
     )
     return gist.html_url
 
@@ -68,7 +74,7 @@ def write_url(url: str, output_file: str):
 
 def main():
     args = parse_arguments()
-    url = create_gist(args.input, args.token)
+    url = create_gist(args.input, args.token, args.title)
     write_url(url, args.output)
 
 

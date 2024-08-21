@@ -2,6 +2,7 @@ import argparse
 
 from github import Github, InputFileContent
 from pathlib import Path
+from typing import Optional
 
 
 def parse_arguments():
@@ -34,7 +35,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def create_gist(input_file: str, token: str, title: str | None) -> str:
+def create_gist(input_file: str, token: str, title: Optional[str] = None) -> str:
     """
     Creates a private GitHub Gist from the contents of the specified input file.
     The URL of the created Gist is returned.

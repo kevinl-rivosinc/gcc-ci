@@ -1,0 +1,42 @@
+name: workflow conditions
+on:
+  push:
+    branches:
+      - kevinl/workflow_conditions_test
+
+jobs:
+  compare-artifacts:
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        run: |
+          git submodule update --init riscv-gnu-toolchain
+
+      - name: fail
+        run: |
+          echo "test" >> test.md
+          echo $(cat test.md)
+          exit 1
+
+      - name: sleep
+        if: ${{ always() }}
+        run: |
+          sleep 30
+      
+      - name: failed
+        if: ${{ failure() }}
+        run: |
+          echo $(cat test.md)
+
+      - name: failed
+        if: ${{ failure() }}
+        run: |
+          echo $(cat test.md)
+
+      - name: always
+        if: ${{ always() }}
+        run: |
+          echo $(cat test.md)

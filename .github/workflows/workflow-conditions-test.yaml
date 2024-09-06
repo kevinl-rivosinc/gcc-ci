@@ -15,6 +15,11 @@ jobs:
         run: |
           git submodule update --init riscv-gnu-toolchain
 
+      - name: Add Valid-Baseline Label to New Issue
+        uses: ./.github/actions/test-action
+        with:
+          label: "'valid-baseline'"
+
       - name: fail
         run: |
           echo "test" >> test.md

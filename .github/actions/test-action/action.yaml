@@ -1,0 +1,14 @@
+name: "Save label"
+description: "Save label to the given file"
+inputs:
+  label:
+    description: 'label to be added'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Save the label
+      shell: bash
+      run: |
+        echo -n "${{ inputs.label }}"

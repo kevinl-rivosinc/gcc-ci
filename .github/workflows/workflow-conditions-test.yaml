@@ -26,18 +26,17 @@ jobs:
           echo $(cat test.md)
           exit 1
 
-      - name: sleep
-        if: ${{ always() }}
-        run: |
-          sleep 30
+      # - name: sleep
+      #   if: ${{ always() }}
+      #   run: |
+      #     sleep 30
       
       - name: failed
         if: ${{ failure() }}
         run: |
           echo $(cat test.md)
 
-      - name: failed
-        if: ${{ failure() }}
+      - name: neutral
         run: |
           echo $(cat test.md)
 

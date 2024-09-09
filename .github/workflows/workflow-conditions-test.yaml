@@ -21,9 +21,11 @@ jobs:
           label: "'valid-baseline'"
 
       - name: fail
+        id: fail
         run: |
           echo "test" >> test.md
           echo $(cat test.md)
+          echo "check=true" >> "$GITHUB_OUTPUT"
           exit 1
 
       # - name: sleep
@@ -37,6 +39,7 @@ jobs:
           echo $(cat test.md)
 
       - name: neutral
+        if: ${{ steps.fail.outputs.check == "true" }}
         run: |
           echo $(cat test.md)
 

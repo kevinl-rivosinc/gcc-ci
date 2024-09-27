@@ -48,7 +48,7 @@ def search_for_artifact(
     repo = github.get_repo(repo_name)
     # manual
     artifact_found = repo.get_artifact(1978178573)
-    print(artifact_found)
+    print(artifact_found.workflow_run)
 
     artifacts = repo.get_artifacts(artifact_name).get_page(0)
     print("artifacts: ", artifacts)

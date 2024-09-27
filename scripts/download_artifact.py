@@ -48,6 +48,7 @@ def search_for_artifact(
     repo = github.get_repo(repo_name)
 
     artifacts = repo.get_artifacts(artifact_name).get_page(0)
+    print("artifacts: ", artifacts)
     if len(artifacts) != 0:
         return str(artifacts[0].id)
 

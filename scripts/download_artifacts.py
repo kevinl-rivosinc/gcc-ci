@@ -401,6 +401,8 @@ def download_all_artifacts(
 
     for artifact_name_template in artifact_name_templates:
         artifact = artifact_name_template.format(current_hash)
+        # Download all the required artifacts
+        base_hash = search_and_download_previous_report_artifact(artifact_name_template, previous_hash, prev_commits, repo_name, token)
         if build_logs:
             download_build_log_artifact(artifact_name_template, base_hash, repo_name, token, build_logs_dir)
 

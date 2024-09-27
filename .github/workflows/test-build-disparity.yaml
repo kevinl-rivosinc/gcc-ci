@@ -21,7 +21,7 @@ jobs:
       - name: test gist step
         run: |
           python3 -m pip install pygithub requests pyopenssl --upgrade
-          python3 ./riscv-gnu-toolchain/scripts/download_artifacts.py -hash 4bd3ccae58d40fad6bd99ed08ef4e1e4d70fefd0 -repo patrick-rivos/gcc-postcommit-ci -token ${{ secrets.GITHUB_TOKEN }} -prefix "" -build-logs -build-logs-dir ./riscv-gnu-toolchain/previous_build_log_zips
+          python3 ./scripts/download_artifacts.py -hash 4bd3ccae58d40fad6bd99ed08ef4e1e4d70fefd0 -repo patrick-rivos/gcc-postcommit-ci -token ${{ secrets.GITHUB_TOKEN }} -prefix "" -build-logs -build-logs-dir ./riscv-gnu-toolchain/previous_build_log_zips
           ls riscv-gnu-toolchain/previous_logs
 
       - name: Upload New Build Warnings

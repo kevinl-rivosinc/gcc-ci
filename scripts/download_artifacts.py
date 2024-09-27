@@ -365,6 +365,7 @@ def download_build_log_artifact(
     artifact_id = search_for_artifact(
         artifact_name, repo_name, token, github
     )
+    print("artifact_id: ", artifact_id)
     if not artifact_id:
         print(f"{artifact_name} doesn't exist in {repo_name}")
         return

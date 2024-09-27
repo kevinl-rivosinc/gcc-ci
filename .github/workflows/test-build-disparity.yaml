@@ -24,6 +24,8 @@ jobs:
           mkdir previous_build_log_zips
           python3 ./scripts/download_artifacts.py -hash 4bd3ccae58d40fad6bd99ed08ef4e1e4d70fefd0 -repo patrick-rivos/gcc-postcommit-ci -token ${{ secrets.GITHUB_TOKEN }} -prefix "" -build-logs -build-logs-dir ./previous_build_log_zips
           ls previous_build_log_zips
+          unzip previous_build_log_zips/newlib-rv32gc-ilp32d-824229e38662b5921e156d0fcbd7180462ba9d60-non-multilib-build-log.zip
+          cat previous_build_log_zips/build/linux-rv32gc-ilp32d-824229e38662b5921e156d0fcbd7180462ba9d60-non-multilib-build-log-stderr.log
 
       - name: Upload New Build Warnings
         uses: actions/upload-artifact@v4

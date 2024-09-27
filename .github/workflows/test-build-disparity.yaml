@@ -1,0 +1,33 @@
+name: test gist
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  compare-artifacts:
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup env
+        run: |
+          git submodule update --init riscv-gnu-toolchain
+
+      - name: test gist step
+        run: |
+          pip install pygithub requests
+          python ./riscv-gnu-toolchain/scripts/download_artifacts.py -hash 4bd3ccae58d40fad6bd99ed08ef4e1e4d70fefd0 -repo patrick-rivos/gcc-postcommit-ci -token {{ secrets.GITHUB_TOKEN }} -prefix "" -build-logs -build-logs-dir ./riscv-gnu-toolchain/previous_build_log_zips
+          ls riscv-gnu-toolchain/previous_logs
+
+      - name: Upload New Build Warnings
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-warnings
+          path: ./riscv-gnu-toolchain/previous_build_log_zips
+          retention-days: 2
+        continue-on-error: true

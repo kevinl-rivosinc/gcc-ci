@@ -46,6 +46,9 @@ def search_for_artifact(
         github = Github(auth=auth)
 
     repo = github.get_repo(repo_name)
+    # manual
+    artifact_found = repo.get_artifact(1978178573)
+    print(artifact_found)
 
     artifacts = repo.get_artifacts(artifact_name).get_page(0)
     print("artifacts: ", artifacts)

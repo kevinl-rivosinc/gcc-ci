@@ -8,29 +8,20 @@ on:
       - main
 
 jobs:
-  compare-artifacts:
+  tests:
     runs-on: ubuntu-20.04
-    environment: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Setup env
-        run: |
-          git submodule update --init riscv-gnu-toolchain
-
-      - name: test gist step
-        run: |
-          python3 -m pip install pygithub requests pyopenssl --upgrade
-          mkdir previous_build_log_zips
-          python3 ./scripts/download_artifacts.py -hash 4bd3ccae58d40fad6bd99ed08ef4e1e4d70fefd0 -repo patrick-rivos/gcc-postcommit-ci -token ${{ secrets.GITHUB_TOKEN }} -prefix "" -build-logs -build-logs-dir ./previous_build_log_zips
-          ls previous_build_log_zips
-          unzip previous_build_log_zips/newlib-rv32gc-ilp32d-824229e38662b5921e156d0fcbd7180462ba9d60-non-multilib-build-log.zip
-          cat build/newlib-rv32gc-ilp32d-824229e38662b5921e156d0fcbd7180462ba9d60-non-multilib-build-log-stderr.log
-
-      - name: Upload New Build Warnings
-        uses: actions/upload-artifact@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          name: build-warnings
-          path: ./previous_build_log_zips
-          retention-days: 2
-        continue-on-error: true
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: python version check
+        run: |
+          which python
+          which python3
+          which pip
+          which pip3

@@ -1,0 +1,11 @@
+name: "Check Python"
+description: "Check Python"
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: Python commands
+      run: |
+        pip freeze
+        

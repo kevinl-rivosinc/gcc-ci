@@ -4,8 +4,8 @@ description: "Check Python"
 
 runs:
   using: "composite"
+  shell: bash
   steps:
     - name: Python commands
       run: |
         pip freeze
-        

@@ -28,5 +28,5 @@ jobs:
           pip install -r requirements.txt
       
       - name: python check
-        uses: actions/check-python
+        uses: ./.github/actions/check-python
 

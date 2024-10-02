@@ -19,6 +19,12 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
+      - name: Setup env
+        uses: ./.github/actions/setup-env
+        with:
+          riscv_gnu_toolchain_hash: ${{ inputs.riscv_gnu_toolchain_hash }}
+          free_up_space: true
+          
       - name: python version check
         run: |
           which python

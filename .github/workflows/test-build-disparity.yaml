@@ -26,7 +26,7 @@ jobs:
           which pip
           which pip3
           pip install -r requirements.txt
-          python ./scripts/download_artifact.py -name 39099-v2_Improve_vsetvl_vconfig_alignment-1-downloaded-patches -repo ewlu/gcc-precommit-ci -token ${{ secrets.GITHUB_TOKEN }} -outdir ./patches
+          python ./riscv-gnu-toolchain/scripts/download_artifact.py -name 39099-v2_Improve_vsetvl_vconfig_alignment-1-downloaded-patches -repo ewlu/gcc-precommit-ci -token ${{ secrets.GITHUB_TOKEN }} -outdir ./patches
           ls patches
           unzip patches/39099-v2_Improve_vsetvl_vconfig_alignment-1-downloaded-patches
 
